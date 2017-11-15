@@ -16,6 +16,8 @@ public class Residencias {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Alumno x = new Alumno();
+        x.nombre = "Arturo";
     }
     
 }
