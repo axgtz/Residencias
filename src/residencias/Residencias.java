@@ -5,6 +5,12 @@
  */
 package residencias;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
 /**
  *
  * @author burela
@@ -16,8 +22,17 @@ public class Residencias {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Alumno x = new Alumno();
-        x.nombre = "Arturo";
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Alumno> consultaAlumnos = em.createNamedQuery("Alumno.findByNombre", Alumno.class);
+        consultaAlumnos.setParameter("nombre", "Arturo");
+        List<Alumno> lista = consultaAlumnos.getResultList();
+        System.out.println("*************Alumnos*********");
+        for (Alumno a : lista) {
+            System.out.println(a.getNombre() + "," + a.getNombre());
+        }
+        em.close();
+        System.out.println("termino");
     }
-    
+
 }
