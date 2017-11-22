@@ -33,6 +33,9 @@ public class Residencias {
         }
         em.close();
         System.out.println("termino");
+        // Enviar mail de prueba
+        EnviarMail mail = new EnviarMail();
+        mail.EnviarMail("Subject1","hola","jpgl1997@gmail.com");
     }
 
 }
