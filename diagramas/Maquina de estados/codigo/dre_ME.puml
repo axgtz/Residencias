@@ -1,0 +1,9 @@
+[*] --> Inicio
+Inicio : Seleccionar prefecto responsable
+Rúbrica: Completar las ponderaciones de la rúbrica
+Terminar : Registrar la información
+
+Inicio --> Rúbrica: Completar
+Rúbrica--> Terminar : almacenar
+Terminar --> [*]
+@enduml

@@ -1,0 +1,11 @@
+[*] --> Inicio
+Inicio : Seleccionar alumno a contactar
+Motivo: Seleccionar el motivo de contacto
+Descripción: Agregar mensaje
+Terminar : Mandar la información
+
+Inicio --> Motivo: Agregar
+Motivo --> Descripción: Completar
+Descripción--> Terminar : mandar
+Terminar --> [*]
+@enduml

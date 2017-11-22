@@ -1,0 +1,8 @@
+[*] --> Inicio
+Inicio : Seleccionar baja deseada
+Selccionar: Seleccionar información a dar de baja
+Terminar : Dar de baja la información
+Inicio --> Selccionar : Seleccionar
+Selccionar --> Terminar : almacenar
+Terminar --> [*]
+@enduml
