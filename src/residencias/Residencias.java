@@ -21,6 +21,8 @@ public class Residencias {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Administración admin = new Administración();
+        admin.setVisible(true);
         // TODO code application logic here
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
         EntityManager em = emf.createEntityManager();
