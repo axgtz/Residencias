@@ -1,0 +1,14 @@
+@startuml
+actor Usuario
+
+Usuario -> Alumno: consulta()
+activate Alumno
+Alumno -> Usuario: String Alumnos
+deactivate Alumno
+
+Usuario -> Alumno: baja()
+activate Alumno
+Alumno -> Usuario: Verdadero
+deactivate Alumno
+
+@enduml
