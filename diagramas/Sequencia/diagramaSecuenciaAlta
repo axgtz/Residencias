@@ -1,0 +1,10 @@
+@startuml
+actor Usuario
+
+Usuario -> Alumno: alta()
+activate Alumno
+
+Alumno --> Usuario: Verdadero
+deactivate Alumno
+
+@enduml

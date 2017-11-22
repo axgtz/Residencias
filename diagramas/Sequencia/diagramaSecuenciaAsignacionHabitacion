@@ -1,0 +1,19 @@
+@startuml
+actor Usuario
+
+
+Usuario -> Habitacion: consulta()
+activate Habitacion
+Habitacion -> Usuario: Arreglo Habitaciones
+deactivate Habitacion
+
+Usuario -> Alumno: consulta()
+activate Alumno
+Alumno -> Usuario: Arreglo Alumnos
+
+Usuario -> Alumno: asignarHabitacion()
+
+Alumno -> Usuario: Verdadero
+deactivate Alumno
+
+@enduml
