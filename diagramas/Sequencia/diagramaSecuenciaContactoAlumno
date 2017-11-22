@@ -1,0 +1,12 @@
+@startuml
+actor Usuario
+
+Usuario -> Alumno: consultar()
+activate Alumno
+Alumno -> Usuario: Objeto Alumno
+deactivate Alumno
+
+Usuario -> Alumno: contactarAlumno()
+activate Alumno
+Alumno -> Usuario: Verdadero
+@enduml
