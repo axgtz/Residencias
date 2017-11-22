@@ -3,6 +3,17 @@
   <persistence-unit name="ResidenciasPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>residencias.Alumno</class>
+    <class>residencias.AlumnohasHabitacion</class>
+    <class>residencias.Indisciplina</class>
+    <class>residencias.Horasentrada</class>
+    <class>residencias.Actividades</class>
+    <class>residencias.Visita</class>
+    <class>residencias.Perfilmedico</class>
+    <class>residencias.Prefecto</class>
+    <class>residencias.Concepto</class>
+    <class>residencias.Habitacion</class>
+    <class>residencias.Rubricaevaluacion</class>
+    <class>residencias.Perfilpsicologico</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://40.76.89.85:80/residencias?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="finley"/>
