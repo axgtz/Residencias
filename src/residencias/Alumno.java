@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,11 +35,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Alumno.findByApellidoPaterno", query = "SELECT a FROM Alumno a WHERE a.apellidoPaterno = :apellidoPaterno")
     , @NamedQuery(name = "Alumno.findByApellidoMaterno", query = "SELECT a FROM Alumno a WHERE a.apellidoMaterno = :apellidoMaterno")
     , @NamedQuery(name = "Alumno.findByMatricula", query = "SELECT a FROM Alumno a WHERE a.matricula = :matricula")
-    , @NamedQuery(name = "Alumno.findByEmail", query = "SELECT a FROM Alumno a WHERE a.email = :email")})
+    , @NamedQuery(name = "Alumno.findByEmail", query = "SELECT a FROM Alumno a WHERE a.email = :email")
+    , @NamedQuery(name = "Alumno.findByCarrera", query = "SELECT a FROM Alumno a WHERE a.carrera = :carrera")
+    , @NamedQuery(name = "Alumno.findByEstatus", query = "SELECT a FROM Alumno a WHERE a.estatus = :estatus")
+    , @NamedQuery(name = "Alumno.findByDisciplinaDeportiva", query = "SELECT a FROM Alumno a WHERE a.disciplinaDeportiva = :disciplinaDeportiva")
+    , @NamedQuery(name = "Alumno.findByEstadoProcedencia", query = "SELECT a FROM Alumno a WHERE a.estadoProcedencia = :estadoProcedencia")})
 public class Alumno implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idAlumno")
     private Integer idAlumno;
@@ -56,20 +63,36 @@ public class Alumno implements Serializable {
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
-    private Collection<Perfilpsicologico> perfilpsicologicoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
+    @Basic(optional = false)
+    @Column(name = "carrera")
+    private String carrera;
+    @Basic(optional = false)
+    @Column(name = "estatus")
+    private String estatus;
+    @Basic(optional = false)
+    @Column(name = "disciplinaDeportiva")
+    private String disciplinaDeportiva;
+    @Basic(optional = false)
+    @Column(name = "estadoProcedencia")
+    private String estadoProcedencia;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnoidAlumno")
     private Collection<Rubricaevaluacion> rubricaevaluacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnoidAlumno")
     private Collection<Visita> visitaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
     private Collection<AlumnohasHabitacion> alumnohasHabitacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnoidAlumno")
+    private Collection<Horasentrada> horasentradaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnoidAlumno")
+    private Collection<Calificacion> calificacionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
+    private Collection<Perfilpsicologico> perfilpsicologicoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnoidAlumno")
+    private Collection<Ausencia> ausenciaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnoidAlumno")
     private Collection<Indisciplina> indisciplinaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
     private Collection<Perfilmedico> perfilmedicoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnoidAlumno")
-    private Collection<Horasentrada> horasentradaCollection;
 
     public Alumno() {
     }
@@ -78,13 +101,17 @@ public class Alumno implements Serializable {
         this.idAlumno = idAlumno;
     }
 
-    public Alumno(Integer idAlumno, String nombre, String apellidoPaterno, String apellidoMaterno, String matricula, String email) {
+    public Alumno(Integer idAlumno, String nombre, String apellidoPaterno, String apellidoMaterno, String matricula, String email, String carrera, String estatus, String disciplinaDeportiva, String estadoProcedencia) {
         this.idAlumno = idAlumno;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.matricula = matricula;
         this.email = email;
+        this.carrera = carrera;
+        this.estatus = estatus;
+        this.disciplinaDeportiva = disciplinaDeportiva;
+        this.estadoProcedencia = estadoProcedencia;
     }
 
     public Integer getIdAlumno() {
@@ -135,13 +162,36 @@ public class Alumno implements Serializable {
         this.email = email;
     }
 
-    @XmlTransient
-    public Collection<Perfilpsicologico> getPerfilpsicologicoCollection() {
-        return perfilpsicologicoCollection;
+    public String getCarrera() {
+        return carrera;
     }
 
-    public void setPerfilpsicologicoCollection(Collection<Perfilpsicologico> perfilpsicologicoCollection) {
-        this.perfilpsicologicoCollection = perfilpsicologicoCollection;
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
+    public String getDisciplinaDeportiva() {
+        return disciplinaDeportiva;
+    }
+
+    public void setDisciplinaDeportiva(String disciplinaDeportiva) {
+        this.disciplinaDeportiva = disciplinaDeportiva;
+    }
+
+    public String getEstadoProcedencia() {
+        return estadoProcedencia;
+    }
+
+    public void setEstadoProcedencia(String estadoProcedencia) {
+        this.estadoProcedencia = estadoProcedencia;
     }
 
     @XmlTransient
@@ -172,6 +222,42 @@ public class Alumno implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Horasentrada> getHorasentradaCollection() {
+        return horasentradaCollection;
+    }
+
+    public void setHorasentradaCollection(Collection<Horasentrada> horasentradaCollection) {
+        this.horasentradaCollection = horasentradaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Calificacion> getCalificacionCollection() {
+        return calificacionCollection;
+    }
+
+    public void setCalificacionCollection(Collection<Calificacion> calificacionCollection) {
+        this.calificacionCollection = calificacionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Perfilpsicologico> getPerfilpsicologicoCollection() {
+        return perfilpsicologicoCollection;
+    }
+
+    public void setPerfilpsicologicoCollection(Collection<Perfilpsicologico> perfilpsicologicoCollection) {
+        this.perfilpsicologicoCollection = perfilpsicologicoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Ausencia> getAusenciaCollection() {
+        return ausenciaCollection;
+    }
+
+    public void setAusenciaCollection(Collection<Ausencia> ausenciaCollection) {
+        this.ausenciaCollection = ausenciaCollection;
+    }
+
+    @XmlTransient
     public Collection<Indisciplina> getIndisciplinaCollection() {
         return indisciplinaCollection;
     }
@@ -187,15 +273,6 @@ public class Alumno implements Serializable {
 
     public void setPerfilmedicoCollection(Collection<Perfilmedico> perfilmedicoCollection) {
         this.perfilmedicoCollection = perfilmedicoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Horasentrada> getHorasentradaCollection() {
-        return horasentradaCollection;
-    }
-
-    public void setHorasentradaCollection(Collection<Horasentrada> horasentradaCollection) {
-        this.horasentradaCollection = horasentradaCollection;
     }
 
     @Override

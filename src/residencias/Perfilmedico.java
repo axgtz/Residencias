@@ -28,32 +28,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Perfilmedico.findAll", query = "SELECT p FROM Perfilmedico p")
     , @NamedQuery(name = "Perfilmedico.findByIdPerfil", query = "SELECT p FROM Perfilmedico p WHERE p.perfilmedicoPK.idPerfil = :idPerfil")
-    , @NamedQuery(name = "Perfilmedico.findByAlumnoidAlumno", query = "SELECT p FROM Perfilmedico p WHERE p.perfilmedicoPK.alumnoidAlumno = :alumnoidAlumno")
-    , @NamedQuery(name = "Perfilmedico.findByTipoSangre", query = "SELECT p FROM Perfilmedico p WHERE p.tipoSangre = :tipoSangre")
-    , @NamedQuery(name = "Perfilmedico.findBySexo", query = "SELECT p FROM Perfilmedico p WHERE p.sexo = :sexo")
-    , @NamedQuery(name = "Perfilmedico.findByAltura", query = "SELECT p FROM Perfilmedico p WHERE p.altura = :altura")
-    , @NamedQuery(name = "Perfilmedico.findByPeso", query = "SELECT p FROM Perfilmedico p WHERE p.peso = :peso")
-    , @NamedQuery(name = "Perfilmedico.findByAlergias", query = "SELECT p FROM Perfilmedico p WHERE p.alergias = :alergias")})
+    , @NamedQuery(name = "Perfilmedico.findByAlumnoidAlumno", query = "SELECT p FROM Perfilmedico p WHERE p.perfilmedicoPK.alumnoidAlumno = :alumnoidAlumno")})
 public class Perfilmedico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PerfilmedicoPK perfilmedicoPK;
     @Basic(optional = false)
-    @Column(name = "tipoSangre")
-    private String tipoSangre;
-    @Basic(optional = false)
-    @Column(name = "sexo")
-    private boolean sexo;
-    @Basic(optional = false)
-    @Column(name = "altura")
-    private float altura;
-    @Basic(optional = false)
-    @Column(name = "peso")
-    private float peso;
-    @Basic(optional = false)
-    @Column(name = "alergias")
-    private String alergias;
+    @Lob
+    @Column(name = "archivo")
+    private byte[] archivo;
     @Lob
     @Column(name = "comentarios")
     private String comentarios;
@@ -68,13 +52,9 @@ public class Perfilmedico implements Serializable {
         this.perfilmedicoPK = perfilmedicoPK;
     }
 
-    public Perfilmedico(PerfilmedicoPK perfilmedicoPK, String tipoSangre, boolean sexo, float altura, float peso, String alergias) {
+    public Perfilmedico(PerfilmedicoPK perfilmedicoPK, byte[] archivo) {
         this.perfilmedicoPK = perfilmedicoPK;
-        this.tipoSangre = tipoSangre;
-        this.sexo = sexo;
-        this.altura = altura;
-        this.peso = peso;
-        this.alergias = alergias;
+        this.archivo = archivo;
     }
 
     public Perfilmedico(int idPerfil, int alumnoidAlumno) {
@@ -89,44 +69,12 @@ public class Perfilmedico implements Serializable {
         this.perfilmedicoPK = perfilmedicoPK;
     }
 
-    public String getTipoSangre() {
-        return tipoSangre;
+    public byte[] getArchivo() {
+        return archivo;
     }
 
-    public void setTipoSangre(String tipoSangre) {
-        this.tipoSangre = tipoSangre;
-    }
-
-    public boolean getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(boolean sexo) {
-        this.sexo = sexo;
-    }
-
-    public float getAltura() {
-        return altura;
-    }
-
-    public void setAltura(float altura) {
-        this.altura = altura;
-    }
-
-    public float getPeso() {
-        return peso;
-    }
-
-    public void setPeso(float peso) {
-        this.peso = peso;
-    }
-
-    public String getAlergias() {
-        return alergias;
-    }
-
-    public void setAlergias(String alergias) {
-        this.alergias = alergias;
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
     }
 
     public String getComentarios() {

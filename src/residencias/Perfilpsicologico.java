@@ -36,25 +36,8 @@ public class Perfilpsicologico implements Serializable {
     protected PerfilpsicologicoPK perfilpsicologicoPK;
     @Basic(optional = false)
     @Lob
-    @Column(name = "personalidad")
-    private String personalidad;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "comportamiento")
-    private String comportamiento;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "intereses")
-    private String intereses;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "actividades")
-    private String actividades;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "antecentes")
-    private String antecentes;
-    @Basic(optional = false)
+    @Column(name = "archivo")
+    private byte[] archivo;
     @Lob
     @Column(name = "comentarios")
     private String comentarios;
@@ -69,14 +52,9 @@ public class Perfilpsicologico implements Serializable {
         this.perfilpsicologicoPK = perfilpsicologicoPK;
     }
 
-    public Perfilpsicologico(PerfilpsicologicoPK perfilpsicologicoPK, String personalidad, String comportamiento, String intereses, String actividades, String antecentes, String comentarios) {
+    public Perfilpsicologico(PerfilpsicologicoPK perfilpsicologicoPK, byte[] archivo) {
         this.perfilpsicologicoPK = perfilpsicologicoPK;
-        this.personalidad = personalidad;
-        this.comportamiento = comportamiento;
-        this.intereses = intereses;
-        this.actividades = actividades;
-        this.antecentes = antecentes;
-        this.comentarios = comentarios;
+        this.archivo = archivo;
     }
 
     public Perfilpsicologico(int idPerfil, int alumnoidAlumno) {
@@ -91,44 +69,12 @@ public class Perfilpsicologico implements Serializable {
         this.perfilpsicologicoPK = perfilpsicologicoPK;
     }
 
-    public String getPersonalidad() {
-        return personalidad;
+    public byte[] getArchivo() {
+        return archivo;
     }
 
-    public void setPersonalidad(String personalidad) {
-        this.personalidad = personalidad;
-    }
-
-    public String getComportamiento() {
-        return comportamiento;
-    }
-
-    public void setComportamiento(String comportamiento) {
-        this.comportamiento = comportamiento;
-    }
-
-    public String getIntereses() {
-        return intereses;
-    }
-
-    public void setIntereses(String intereses) {
-        this.intereses = intereses;
-    }
-
-    public String getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(String actividades) {
-        this.actividades = actividades;
-    }
-
-    public String getAntecentes() {
-        return antecentes;
-    }
-
-    public void setAntecentes(String antecentes) {
-        this.antecentes = antecentes;
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
     }
 
     public String getComentarios() {

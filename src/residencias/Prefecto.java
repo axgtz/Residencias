@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,6 +39,7 @@ public class Prefecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idPrefecto")
     private Integer idPrefecto;
@@ -52,7 +55,7 @@ public class Prefecto implements Serializable {
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prefecto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prefectoidPrefecto")
     private Collection<Rubricaevaluacion> rubricaevaluacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prefectoidPrefecto")
     private Collection<Actividades> actividadesCollection;

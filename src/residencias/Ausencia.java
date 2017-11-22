@@ -6,7 +6,6 @@
 package residencias;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,54 +24,74 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author burela
  */
 @Entity
-@Table(name = "Indisciplina")
+@Table(name = "Ausencia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Indisciplina.findAll", query = "SELECT i FROM Indisciplina i")
-    , @NamedQuery(name = "Indisciplina.findByIdIndisciplina", query = "SELECT i FROM Indisciplina i WHERE i.idIndisciplina = :idIndisciplina")
-    , @NamedQuery(name = "Indisciplina.findByFecha", query = "SELECT i FROM Indisciplina i WHERE i.fecha = :fecha")})
-public class Indisciplina implements Serializable {
+    @NamedQuery(name = "Ausencia.findAll", query = "SELECT a FROM Ausencia a")
+    , @NamedQuery(name = "Ausencia.findByIdAusencia", query = "SELECT a FROM Ausencia a WHERE a.idAusencia = :idAusencia")
+    , @NamedQuery(name = "Ausencia.findByFecha", query = "SELECT a FROM Ausencia a WHERE a.fecha = :fecha")
+    , @NamedQuery(name = "Ausencia.findByJustificada", query = "SELECT a FROM Ausencia a WHERE a.justificada = :justificada")
+    , @NamedQuery(name = "Ausencia.findByMotivo", query = "SELECT a FROM Ausencia a WHERE a.motivo = :motivo")
+    , @NamedQuery(name = "Ausencia.findByComentarios", query = "SELECT a FROM Ausencia a WHERE a.comentarios = :comentarios")})
+public class Ausencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idIndisciplina")
-    private Integer idIndisciplina;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "motivo")
-    private String motivo;
+    @Column(name = "idAusencia")
+    private Integer idAusencia;
     @Basic(optional = false)
     @Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-    @Lob
+    private String fecha;
+    @Basic(optional = false)
+    @Column(name = "justificada")
+    private boolean justificada;
+    @Basic(optional = false)
+    @Column(name = "motivo")
+    private String motivo;
     @Column(name = "comentarios")
     private String comentarios;
     @JoinColumn(name = "Alumno_idAlumno", referencedColumnName = "idAlumno")
     @ManyToOne(optional = false)
     private Alumno alumnoidAlumno;
 
-    public Indisciplina() {
+    public Ausencia() {
     }
 
-    public Indisciplina(Integer idIndisciplina) {
-        this.idIndisciplina = idIndisciplina;
+    public Ausencia(Integer idAusencia) {
+        this.idAusencia = idAusencia;
     }
 
-    public Indisciplina(Integer idIndisciplina, String motivo, Date fecha) {
-        this.idIndisciplina = idIndisciplina;
+    public Ausencia(Integer idAusencia, String fecha, boolean justificada, String motivo) {
+        this.idAusencia = idAusencia;
+        this.fecha = fecha;
+        this.justificada = justificada;
         this.motivo = motivo;
+    }
+
+    public Integer getIdAusencia() {
+        return idAusencia;
+    }
+
+    public void setIdAusencia(Integer idAusencia) {
+        this.idAusencia = idAusencia;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public Integer getIdIndisciplina() {
-        return idIndisciplina;
+    public boolean getJustificada() {
+        return justificada;
     }
 
-    public void setIdIndisciplina(Integer idIndisciplina) {
-        this.idIndisciplina = idIndisciplina;
+    public void setJustificada(boolean justificada) {
+        this.justificada = justificada;
     }
 
     public String getMotivo() {
@@ -84,14 +100,6 @@ public class Indisciplina implements Serializable {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public String getComentarios() {
@@ -113,18 +121,18 @@ public class Indisciplina implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idIndisciplina != null ? idIndisciplina.hashCode() : 0);
+        hash += (idAusencia != null ? idAusencia.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Indisciplina)) {
+        if (!(object instanceof Ausencia)) {
             return false;
         }
-        Indisciplina other = (Indisciplina) object;
-        if ((this.idIndisciplina == null && other.idIndisciplina != null) || (this.idIndisciplina != null && !this.idIndisciplina.equals(other.idIndisciplina))) {
+        Ausencia other = (Ausencia) object;
+        if ((this.idAusencia == null && other.idAusencia != null) || (this.idAusencia != null && !this.idAusencia.equals(other.idAusencia))) {
             return false;
         }
         return true;
@@ -132,7 +140,7 @@ public class Indisciplina implements Serializable {
 
     @Override
     public String toString() {
-        return "residencias.Indisciplina[ idIndisciplina=" + idIndisciplina + " ]";
+        return "residencias.Ausencia[ idAusencia=" + idAusencia + " ]";
     }
     
 }

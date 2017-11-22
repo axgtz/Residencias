@@ -14,6 +14,8 @@
     <class>residencias.Habitacion</class>
     <class>residencias.Rubricaevaluacion</class>
     <class>residencias.Perfilpsicologico</class>
+    <class>residencias.Ausencia</class>
+    <class>residencias.Calificacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://40.76.89.85:80/residencias?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="finley"/>

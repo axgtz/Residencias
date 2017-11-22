@@ -11,8 +11,10 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,49 +35,47 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rubricaevaluacion.findAll", query = "SELECT r FROM Rubricaevaluacion r")
-    , @NamedQuery(name = "Rubricaevaluacion.findByAlumnoidAlumno", query = "SELECT r FROM Rubricaevaluacion r WHERE r.rubricaevaluacionPK.alumnoidAlumno = :alumnoidAlumno")
-    , @NamedQuery(name = "Rubricaevaluacion.findByPrefectoidPrefecto", query = "SELECT r FROM Rubricaevaluacion r WHERE r.rubricaevaluacionPK.prefectoidPrefecto = :prefectoidPrefecto")
+    , @NamedQuery(name = "Rubricaevaluacion.findByIdRubrica", query = "SELECT r FROM Rubricaevaluacion r WHERE r.idRubrica = :idRubrica")
     , @NamedQuery(name = "Rubricaevaluacion.findByFecha", query = "SELECT r FROM Rubricaevaluacion r WHERE r.fecha = :fecha")})
 public class Rubricaevaluacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected RubricaevaluacionPK rubricaevaluacionPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idRubrica")
+    private Integer idRubrica;
     @Basic(optional = false)
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @JoinColumn(name = "Alumno_idAlumno", referencedColumnName = "idAlumno", insertable = false, updatable = false)
+    @JoinColumn(name = "Alumno_idAlumno", referencedColumnName = "idAlumno")
     @ManyToOne(optional = false)
-    private Alumno alumno;
-    @JoinColumn(name = "Prefecto_idPrefecto", referencedColumnName = "idPrefecto", insertable = false, updatable = false)
+    private Alumno alumnoidAlumno;
+    @JoinColumn(name = "Prefecto_idPrefecto", referencedColumnName = "idPrefecto")
     @ManyToOne(optional = false)
-    private Prefecto prefecto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubricaevaluacion")
+    private Prefecto prefectoidPrefecto;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubricaevaluacionidRubrica")
     private Collection<Concepto> conceptoCollection;
 
     public Rubricaevaluacion() {
     }
 
-    public Rubricaevaluacion(RubricaevaluacionPK rubricaevaluacionPK) {
-        this.rubricaevaluacionPK = rubricaevaluacionPK;
+    public Rubricaevaluacion(Integer idRubrica) {
+        this.idRubrica = idRubrica;
     }
 
-    public Rubricaevaluacion(RubricaevaluacionPK rubricaevaluacionPK, Date fecha) {
-        this.rubricaevaluacionPK = rubricaevaluacionPK;
+    public Rubricaevaluacion(Integer idRubrica, Date fecha) {
+        this.idRubrica = idRubrica;
         this.fecha = fecha;
     }
 
-    public Rubricaevaluacion(int alumnoidAlumno, int prefectoidPrefecto) {
-        this.rubricaevaluacionPK = new RubricaevaluacionPK(alumnoidAlumno, prefectoidPrefecto);
+    public Integer getIdRubrica() {
+        return idRubrica;
     }
 
-    public RubricaevaluacionPK getRubricaevaluacionPK() {
-        return rubricaevaluacionPK;
-    }
-
-    public void setRubricaevaluacionPK(RubricaevaluacionPK rubricaevaluacionPK) {
-        this.rubricaevaluacionPK = rubricaevaluacionPK;
+    public void setIdRubrica(Integer idRubrica) {
+        this.idRubrica = idRubrica;
     }
 
     public Date getFecha() {
@@ -86,20 +86,20 @@ public class Rubricaevaluacion implements Serializable {
         this.fecha = fecha;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
+    public Alumno getAlumnoidAlumno() {
+        return alumnoidAlumno;
     }
 
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
+    public void setAlumnoidAlumno(Alumno alumnoidAlumno) {
+        this.alumnoidAlumno = alumnoidAlumno;
     }
 
-    public Prefecto getPrefecto() {
-        return prefecto;
+    public Prefecto getPrefectoidPrefecto() {
+        return prefectoidPrefecto;
     }
 
-    public void setPrefecto(Prefecto prefecto) {
-        this.prefecto = prefecto;
+    public void setPrefectoidPrefecto(Prefecto prefectoidPrefecto) {
+        this.prefectoidPrefecto = prefectoidPrefecto;
     }
 
     @XmlTransient
@@ -114,7 +114,7 @@ public class Rubricaevaluacion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (rubricaevaluacionPK != null ? rubricaevaluacionPK.hashCode() : 0);
+        hash += (idRubrica != null ? idRubrica.hashCode() : 0);
         return hash;
     }
 
@@ -125,7 +125,7 @@ public class Rubricaevaluacion implements Serializable {
             return false;
         }
         Rubricaevaluacion other = (Rubricaevaluacion) object;
-        if ((this.rubricaevaluacionPK == null && other.rubricaevaluacionPK != null) || (this.rubricaevaluacionPK != null && !this.rubricaevaluacionPK.equals(other.rubricaevaluacionPK))) {
+        if ((this.idRubrica == null && other.idRubrica != null) || (this.idRubrica != null && !this.idRubrica.equals(other.idRubrica))) {
             return false;
         }
         return true;
@@ -133,7 +133,7 @@ public class Rubricaevaluacion implements Serializable {
 
     @Override
     public String toString() {
-        return "residencias.Rubricaevaluacion[ rubricaevaluacionPK=" + rubricaevaluacionPK + " ]";
+        return "residencias.Rubricaevaluacion[ idRubrica=" + idRubrica + " ]";
     }
     
 }

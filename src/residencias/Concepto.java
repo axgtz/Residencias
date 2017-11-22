@@ -9,9 +9,10 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,6 +35,7 @@ public class Concepto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idConcepto")
     private Integer idConcepto;
@@ -43,11 +45,9 @@ public class Concepto implements Serializable {
     @Basic(optional = false)
     @Column(name = "porcentaje")
     private int porcentaje;
-    @JoinColumns({
-        @JoinColumn(name = "Rubrica_evaluacion_Alumno_idAlumno", referencedColumnName = "Alumno_idAlumno")
-        , @JoinColumn(name = "Rubrica_evaluacion_Prefecto_idPrefecto", referencedColumnName = "Prefecto_idPrefecto")})
+    @JoinColumn(name = "Rubrica_evaluacion_idRubrica", referencedColumnName = "idRubrica")
     @ManyToOne(optional = false)
-    private Rubricaevaluacion rubricaevaluacion;
+    private Rubricaevaluacion rubricaevaluacionidRubrica;
 
     public Concepto() {
     }
@@ -86,12 +86,12 @@ public class Concepto implements Serializable {
         this.porcentaje = porcentaje;
     }
 
-    public Rubricaevaluacion getRubricaevaluacion() {
-        return rubricaevaluacion;
+    public Rubricaevaluacion getRubricaevaluacionidRubrica() {
+        return rubricaevaluacionidRubrica;
     }
 
-    public void setRubricaevaluacion(Rubricaevaluacion rubricaevaluacion) {
-        this.rubricaevaluacion = rubricaevaluacion;
+    public void setRubricaevaluacionidRubrica(Rubricaevaluacion rubricaevaluacionidRubrica) {
+        this.rubricaevaluacionidRubrica = rubricaevaluacionidRubrica;
     }
 
     @Override

@@ -24,8 +24,8 @@ public class Residencias {
         // TODO code application logic here
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Alumno> consultaAlumnos = em.createNamedQuery("Alumno.findByNombre", Alumno.class);
-        consultaAlumnos.setParameter("nombre", "Arturo");
+        TypedQuery<Alumno> consultaAlumnos = em.createNamedQuery("Alumno.findAll", Alumno.class);
+        // consultaAlumnos.setParameter("nombre", "Arturo");
         List<Alumno> lista = consultaAlumnos.getResultList();
         System.out.println("*************Alumnos*********");
         for (Alumno a : lista) {
