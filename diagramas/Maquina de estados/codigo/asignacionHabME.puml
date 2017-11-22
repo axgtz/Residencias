@@ -1,0 +1,9 @@
+[*] --> Inicio
+Inicio : Seleccionar alumno
+Cuarto: Seleccionar el cuarto del alumno
+Terminar : Registrar información
+
+Inicio --> Cuarto : asignar
+Cuarto --> Terminar : almacenar
+Terminar --> [*]
+@enduml

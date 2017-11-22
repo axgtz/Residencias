@@ -1,0 +1,8 @@
+[*] --> Inicio
+Inicio : Escoger tipo de registro (horas, ausencias y visitas)
+Completar: Ingresar los campos requeridos
+Terminar : Registrar la información
+Inicio --> Completar : Completar
+Completar --> Terminar : almacenar
+Terminar --> [*]
+@enduml

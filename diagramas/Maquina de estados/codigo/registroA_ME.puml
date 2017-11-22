@@ -1,0 +1,11 @@
+[*] --> Inicio
+Inicio : Ingresar nombre de actividad
+Descripción: Ingresar descripción a la actividad
+Terminar : Registrar la información
+Prefectos : Seleccionar prefectos para la actividad
+
+Inicio --> Descripción: Completar
+Descripción --> Prefectos: Completar
+Prefectos --> Terminar : almacenar
+Terminar --> [*]
+@enduml

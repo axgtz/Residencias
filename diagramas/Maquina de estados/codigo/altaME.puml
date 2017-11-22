@@ -1,0 +1,8 @@
+[*] --> Inicio
+Inicio : Seleccionar alta deseada
+Completar: Ingresar los campos requeridos
+Terminar : Registrar los datos
+Inicio --> Completar : completar
+Completar --> Terminar : almacenar
+Terminar --> [*]
+@enduml

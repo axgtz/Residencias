@@ -1,0 +1,9 @@
+[*] --> Inicio
+Inicio : Seleccionar alumno
+Reporte: Seleccionar el reporte que se quiere ver
+Terminar : Mostrar el reporte
+
+Inicio --> Reporte: seleccionar
+Reporte--> Terminar : desplegar
+Terminar --> [*]
+@enduml

@@ -1,0 +1,77 @@
+@startuml
+
+cloud {
+  [Internet]
+}
+
+database "ALUMNO" AS AL1
+database "PERFIL_M"
+database "PERFIL_P"
+database "INDISCIPLINA"
+database "CALIFICACIONES"
+database "HABITACION"
+database "PREFECTOS"
+database "ACTIVIDADES"
+database "RUBRICA_DE_EVALUACION"
+database "HORAS_ENTRADA"
+database "AUSENCIAS"
+database "VISITAS"
+database "CALIFICACIONES" as cal1
+
+
+[Alta y baja de alumnos] ..>[Alta de historial médico]
+[Alta de historial médico]-->[Alta de perfil psicológico]
+[Alta de perfil psicológico]-->[Alta de indisciplinas]
+[Alta de indisciplinas]-->[Alta de seguimiento académico]
+[Alta de seguimiento académico]-->[Expediente del alumno]
+[Expediente del alumno]-->[Asignación de habitaciones]
+[Asignación de habitaciones]-->[Contacto con alumnos]
+[Contacto con alumnos]-->[Internet]
+[Contacto con alumnos]-->[Alta y baja de prefectos]
+[Alta y baja de prefectos]..>[Registro de actividades]
+[Registro de actividades]-->[Registro de horas, ausencias y visitas]
+[Registro de horas, ausencias y visitas]-->[Definición de rúbricas de evaluación]
+[Definición de rúbricas de evaluación]
+
+[Alta de seguimiento académico]-->cal1
+cal1.>[Alta de seguimiento académico]
+
+[Alta y baja de alumnos] -->AL1
+AL1.>[Alta y baja de alumnos]
+
+[Alta de historial médico]-->PERFIL_M
+PERFIL_M.>[Alta de historial médico]
+
+[Alta de perfil psicológico]-->PERFIL_P
+PERFIL_P.>[Alta de perfil psicológico]
+
+[Alta de indisciplinas]-->INDISCIPLINA
+INDISCIPLINA.>[Alta de indisciplinas]
+
+[Expediente del alumno]-->CALIFICACIONES
+CALIFICACIONES.>[Expediente del alumno]
+
+[Asignación de habitaciones]-->HABITACION
+HABITACION.>[Asignación de habitaciones]
+
+[Alta y baja de prefectos]-->PREFECTOS
+PREFECTOS.>[Alta y baja de prefectos]
+
+[Registro de actividades]-->ACTIVIDADES
+ACTIVIDADES.>[Registro de actividades]
+
+[Registro de horas, ausencias y visitas]-->HORAS_ENTRADA
+HORAS_ENTRADA.>[Registro de horas, ausencias y visitas]
+
+[Registro de horas, ausencias y visitas]-->AUSENCIAS
+AUSENCIAS.>[Registro de horas, ausencias y visitas]
+
+[Registro de horas, ausencias y visitas]-->VISITAS
+VISITAS.>[Registro de horas, ausencias y visitas]
+
+[Definición de rúbricas de evaluación]-->RUBRICA_DE_EVALUACION
+RUBRICA_DE_EVALUACION.>[Definición de rúbricas de evaluación]
+
+
+
+@enduml

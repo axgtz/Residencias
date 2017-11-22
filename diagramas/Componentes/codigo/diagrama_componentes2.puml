@@ -1,0 +1,53 @@
+@startuml
+
+
+node "Sistema" {
+  node "Interfaces"{
+  [Alumnos]
+  [Prefectos]
+  [Reportes]
+  [Habitacion]
+  [Actividades]
+
+}
+
+cloud {
+  database "MySql (azure)" {
+      [ALUMNO]
+      [PREFECTOS]
+      [HORAS_ENTRADA]
+      [AUSENCIAS]
+      [VISITAS]
+      [INDISCIPLINA]
+      [CALIFICACIONES]
+      [RUBRICA DE EVALUACION]
+      [PERFIL_Psicologico]
+      [PERFIL_Medico]
+      [ACTIVIDADES]
+      [HABITACION]
+  }
+}
+
+ConsultaA - [ALUMNO]
+[Alumnos] --> ConsultaA
+
+ConsultaP - [PREFECTOS]
+[Prefectos] --> ConsultaP
+
+ConsultaH - [HABITACION]
+[Habitacion] --> ConsultaH
+
+ConsultaAc - [ACTIVIDADES]
+[Actividades] --> ConsultaAc
+
+[Reportes] --> ConsultaR
+ConsultaR - [HORAS_ENTRADA]
+ConsultaR - [AUSENCIAS]
+ConsultaR - [VISITAS]
+ConsultaR - [INDISCIPLINA]
+ConsultaR - [CALIFICACIONES]
+ConsultaR - [RUBRICA DE EVALUACION]
+ConsultaR - [PERFIL_Psicologico]
+ConsultaR - [PERFIL_Medico]
+}
+@enduml
