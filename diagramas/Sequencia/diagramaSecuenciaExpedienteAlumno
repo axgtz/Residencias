@@ -1,0 +1,14 @@
+@startuml
+actor Usuario
+
+Usuario -> Alumno: consulta()
+activate Alumno
+Alumno -> Usuario: Arreglo - Alumnos
+deactivate Alumno
+
+Usuario -> Calificaciones: alta()
+activate Calificaciones
+Calificaciones -> Usuario: Verdadero
+deactivate Calificaciones
+
+@enduml
