@@ -22,11 +22,16 @@ public class VentanaDetalleAlumno extends javax.swing.JFrame {
     
     Alumno alumno;
     ArrayList<String> horasEntrada;
+    ArrayList<String> califs;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
     EntityManager em = emf.createEntityManager();
     List<Habitacion> habitaciones;
+    List<Horasentrada> horasEntradas;
+    List<Calificacion> calificaciones;
     ArrayList numerosHabitaciones;
     String selectedHabitacion;
+    String[] entradas;
+    String[] cals;
 
     /**
      * Creates new form VentanaDetalleAlumno
@@ -36,15 +41,32 @@ public class VentanaDetalleAlumno extends javax.swing.JFrame {
         alumno = a;
         selectedHabitacion = null;
         horasEntrada = new ArrayList();
-        alumno.getHorasentradaCollection().forEach((temp) -> {
+        TypedQuery<Horasentrada> consultaEntradas = em.createNamedQuery("Horasentrada.findAll", Horasentrada.class);
+        horasEntradas = consultaEntradas.getResultList();
+        horasEntradas.forEach((temp) -> {
             horasEntrada.add(temp.getFecha().toString());
+            System.out.print(temp);
         });
+        entradas = new String[horasEntrada.size()];
+        for (int i=0; i<entradas.length; i++){
+            entradas[i] = horasEntrada.get(i);
+        }
         TypedQuery<Habitacion> consultaHabitaciones = em.createNamedQuery("Habitacion.findAll", Habitacion.class);
         habitaciones = consultaHabitaciones.getResultList();
         numerosHabitaciones = new ArrayList();
         habitaciones.forEach((temp) -> {
             numerosHabitaciones.add(temp.getNumero());
         });
+        TypedQuery<Calificacion> consultaCal = em.createNamedQuery("Calificacion.findAll", Calificacion.class);
+        calificaciones = consultaCal.getResultList();
+        cals = new String[calificaciones.size()];
+        califs = new ArrayList();
+        calificaciones.forEach((temp) -> {
+           califs.add(temp.getIdMateria() + "                           " + temp.getCalificacion());
+        });
+        for (int i=0; i<cals.length; i++){
+            cals[i] = califs.get(i);
+        }
         initComponents();
     }
 
@@ -127,14 +149,14 @@ public class VentanaDetalleAlumno extends javax.swing.JFrame {
         });
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"s","s"};
+            String[] strings = entradas;
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = cals;
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
