@@ -1,0 +1,13 @@
+@startuml
+actor Usuario
+
+Usuario -> Prefecto: consulta()
+activate Prefecto
+Prefecto -> Usuario: Arreglo - Prefectos
+deactivate Prefecto
+
+Usuario -> Actividad: alta()
+activate Actividad
+Actividad -> Usuario: Verdadero
+deactivate Actividad
+@enduml

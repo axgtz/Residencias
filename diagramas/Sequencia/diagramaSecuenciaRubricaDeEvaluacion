@@ -1,10 +1,15 @@
 @startuml
 actor Usuario
 
-Usuario -> Alumno: buscarAlumno()
+Usuario -> Alumno: consulta()
 activate Alumno
 Alumno -> Usuario: Arreglo - Alumnos
 deactivate Alumno
+
+Usuario -> Prefecto: consulta()
+activate Prefecto
+Prefecto -> Usuario: Arreglo - Prefectos
+deactivate Prefecto
 
 Usuario -> RubricaDeEvaluacion: alta()
 activate RubricaDeEvaluacion
