@@ -5,8 +5,10 @@
  */
 package residencias;
 
-import java.util.List;
-import javax.swing.ListModel;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +18,8 @@ public class VentanaDetalleAlumno extends javax.swing.JFrame {
     
     Alumno alumno;
     String[] horasEntrada;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
+    EntityManager em = emf.createEntityManager();
 
     /**
      * Creates new form VentanaDetalleAlumno
@@ -214,6 +218,27 @@ public class VentanaDetalleAlumno extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int n = JOptionPane.showConfirmDialog(null, "Está seguro de eliminar este alumno");
+        System.out.println(n);
+        if(n == 0){
+            em.getTransaction().begin();
+                try {
+                    em.detach(alumno);
+                    if (!em.contains(alumno)) {
+                        alumno = em.merge(alumno);
+                    }
+                    em.remove(alumno);
+                    em.getTransaction().commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    em.getTransaction().rollback();
+                    JOptionPane.showMessageDialog(null, "Error de conexión");
+                } finally {
+                    em.close();
+                    JOptionPane.showMessageDialog(null, "Alumno eliminado con éxito");
+                    dispose();
+                }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
