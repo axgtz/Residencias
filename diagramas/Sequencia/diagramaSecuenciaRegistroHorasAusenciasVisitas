@@ -1,0 +1,13 @@
+@startuml
+actor Usuario
+Usuario -> Alumno: consulta()
+activate Alumno
+Alumno -> Usuario: Arreglo - Alumnos
+deactivate Alumno
+
+Usuario -> HorasAusenciasVisitas: alta()
+activate HorasAusenciasVisitas
+HorasAusenciasVisitas -> Usuario: Verdadero
+deactivate HorasAusenciasVisitas
+
+@enduml
