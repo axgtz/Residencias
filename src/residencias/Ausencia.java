@@ -6,6 +6,7 @@
 package residencias;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,15 +38,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Ausencia.findByComentarios", query = "SELECT a FROM Ausencia a WHERE a.comentarios = :comentarios")})
 public class Ausencia implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idAusencia")
     private Integer idAusencia;
-    @Basic(optional = false)
-    @Column(name = "fecha")
-    private String fecha;
     @Basic(optional = false)
     @Column(name = "justificada")
     private boolean justificada;
@@ -63,7 +68,7 @@ public class Ausencia implements Serializable {
         this.idAusencia = idAusencia;
     }
 
-    public Ausencia(Integer idAusencia, String fecha, boolean justificada, String motivo) {
+    public Ausencia(Integer idAusencia, Date fecha, boolean justificada, String motivo) {
         this.idAusencia = idAusencia;
         this.fecha = fecha;
         this.justificada = justificada;
@@ -78,13 +83,6 @@ public class Ausencia implements Serializable {
         this.idAusencia = idAusencia;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
 
     public boolean getJustificada() {
         return justificada;
@@ -141,6 +139,14 @@ public class Ausencia implements Serializable {
     @Override
     public String toString() {
         return "residencias.Ausencia[ idAusencia=" + idAusencia + " ]";
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
 }

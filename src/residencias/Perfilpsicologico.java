@@ -31,13 +31,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Perfilpsicologico.findByAlumnoidAlumno", query = "SELECT p FROM Perfilpsicologico p WHERE p.perfilpsicologicoPK.alumnoidAlumno = :alumnoidAlumno")})
 public class Perfilpsicologico implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected PerfilpsicologicoPK perfilpsicologicoPK;
     @Basic(optional = false)
     @Lob
     @Column(name = "archivo")
     private byte[] archivo;
+
+    private static final long serialVersionUID = 1L;
+    @EmbeddedId
+    protected PerfilpsicologicoPK perfilpsicologicoPK;
     @Lob
     @Column(name = "comentarios")
     private String comentarios;
@@ -69,13 +70,6 @@ public class Perfilpsicologico implements Serializable {
         this.perfilpsicologicoPK = perfilpsicologicoPK;
     }
 
-    public byte[] getArchivo() {
-        return archivo;
-    }
-
-    public void setArchivo(byte[] archivo) {
-        this.archivo = archivo;
-    }
 
     public String getComentarios() {
         return comentarios;
@@ -116,6 +110,14 @@ public class Perfilpsicologico implements Serializable {
     @Override
     public String toString() {
         return "residencias.Perfilpsicologico[ perfilpsicologicoPK=" + perfilpsicologicoPK + " ]";
+    }
+
+    public byte[] getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
     }
     
 }

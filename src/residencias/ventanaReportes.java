@@ -295,8 +295,7 @@ public class ventanaReportes extends javax.swing.JFrame {
                 Ausencia aus = new Ausencia();
 
                 aus.setAlumnoidAlumno(alumno);
-                //aus.setFecha(fecha);
-                aus.setFecha("popo");
+                aus.setFecha(fecha);
                 aus.setJustificada(true);
                 aus.setComentarios(jTextArea1.getText());
                 aus.setMotivo(motivo.getText());
