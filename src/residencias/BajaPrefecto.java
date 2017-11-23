@@ -171,8 +171,10 @@ public class BajaPrefecto extends javax.swing.JFrame {
         EntityManager em = emf.createEntityManager();
 
         Prefecto p = new Prefecto();
-
+        p.setNombre(nombre.getText());
+        p.setApellido(apellido.getText());
         p.setNomina(nomina.getText());
+        p.setEmail(mail.getText());
 
         em.getTransaction().begin();
         try {
