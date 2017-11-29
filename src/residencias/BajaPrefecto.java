@@ -133,7 +133,7 @@ public class BajaPrefecto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:Baja
-        TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina()", Prefecto.class);
+        TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina", Prefecto.class);
         consultaPrefectos.setParameter("nomina",nomina1.getText());
         Prefecto selectedPrefectoEl;
         System.out.print(consultaPrefectos.getResultList().get(0));

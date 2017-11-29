@@ -249,7 +249,7 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:BUSCAR FECHA
-         TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades()", Actividades.class);
+         TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades", Actividades.class);
         consultaActividades.setParameter("idActividades",idBuscar.getText());
         actividadesList.forEach((temp) -> {
             actividadesListArray.add(temp.getIdActividades().toString());
@@ -280,7 +280,7 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
 
     private void idActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActActionPerformed
         // TODO add your handling code here:del idAct
-        TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades()", Actividades.class);
+        TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades", Actividades.class);
         consultaActividades.setParameter("idActividades",nomina3.getText());
         Actividades selectedActividadesEl;
         System.out.print(consultaActividades.getResultList().get(0));
@@ -316,7 +316,7 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
          // TODO add your handling code here: BUSCAR
-        TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades()", Actividades.class);
+        TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades", Actividades.class);
         consultaActividades.setParameter("idActividades",idBuscar.getText());
         actividadesList.forEach((temp) -> {
             actividadesListArray.add(temp.getIdActividades().toString());
@@ -359,7 +359,7 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
 
         a.setFecha(fecha);
 
-        TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina()", Prefecto.class);
+        TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina", Prefecto.class);
         consultaPrefectos.setParameter("nomina",nomina.getText());
         Prefecto selectedPrefectoEl;
         System.out.print(consultaPrefectos.getResultList().get(0));

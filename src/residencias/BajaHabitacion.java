@@ -120,7 +120,7 @@ public class BajaHabitacion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        TypedQuery<Habitacion> consultaHab = em.createNamedQuery("Habitacion.findByNumero()",Habitacion.class);
+        TypedQuery<Habitacion> consultaHab = em.createNamedQuery("Habitacion.findByNumero",Habitacion.class);
         consultaHab.setParameter("numero",numero.getText());
         Habitacion selectedHabitacionEl;
         System.out.print(consultaHab.getResultList().get(0));
