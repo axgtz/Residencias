@@ -9,13 +9,16 @@ import static java.lang.Integer.parseInt;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author gutz
  */
 public class BajaHabitacion extends javax.swing.JFrame {
-
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
+    EntityManager em = emf.createEntityManager();
     /**
      * Creates new form BajaHabitacion
      */
@@ -34,7 +37,7 @@ public class BajaHabitacion extends javax.swing.JFrame {
 
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        numeroFormated = new javax.swing.JFormattedTextField();
+        numero = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -48,10 +51,10 @@ public class BajaHabitacion extends javax.swing.JFrame {
             }
         });
 
-        numeroFormated.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("##0"))));
-        numeroFormated.addActionListener(new java.awt.event.ActionListener() {
+        numero.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("##0"))));
+        numero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numeroFormatedActionPerformed(evt);
+                numeroActionPerformed(evt);
             }
         });
 
@@ -81,7 +84,7 @@ public class BajaHabitacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(numeroFormated, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
@@ -93,7 +96,7 @@ public class BajaHabitacion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(numeroFormated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -111,32 +114,38 @@ public class BajaHabitacion extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void numeroFormatedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroFormatedActionPerformed
+    private void numeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_numeroFormatedActionPerformed
+    }//GEN-LAST:event_numeroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
-        EntityManager em = emf.createEntityManager();
-                
-        Habitacion h = new Habitacion();
-        h.setNumero(parseInt(numeroFormated.getText()));
-        //h.setCapacidad(1);
+        TypedQuery<Habitacion> consultaHab = em.createNamedQuery("Habitacion.findByNumero()",Habitacion.class);
+        consultaHab.setParameter("numero",numero.getText());
+        Habitacion selectedHabitacionEl;
+        System.out.print(consultaHab.getResultList().get(0));
+        selectedHabitacionEl =consultaHab.getResultList().get(0);
         
-        
-        em.getTransaction().begin();
-        try {
-            em.remove(h);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-            jLabel4.setText("Error al registrar");
-        } finally {
-            System.out.println(parseInt(numeroFormated.getText()));
-            em.close();
-            jLabel4.setText("Borrado correctamente");
+        int n = JOptionPane.showConfirmDialog(null, "Está seguro de eliminar esta Habitacion");
+        System.out.println(n);
+        if(n == 0){
+            em.getTransaction().begin();
+                try {
+                    em.detach(consultaHab);
+                    if (!em.contains(consultaHab)) {
+                        consultaHab = em.merge(consultaHab);
+                    }
+                    em.remove(consultaHab);
+                    em.getTransaction().commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    em.getTransaction().rollback();
+                    JOptionPane.showMessageDialog(null, "Error de conexión");
+                } finally {
+                    em.close();
+                    JOptionPane.showMessageDialog(null, "Habitacion eliminado con éxito");
+                    dispose();
+                }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -181,6 +190,6 @@ public class BajaHabitacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JFormattedTextField numeroFormated;
+    private javax.swing.JFormattedTextField numero;
     // End of variables declaration//GEN-END:variables
 }
