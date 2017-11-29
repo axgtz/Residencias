@@ -5,8 +5,13 @@
  */
 package residencias;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -57,7 +62,7 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        nomina = new javax.swing.JTextField();
+        descipcion = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         idB = new javax.swing.JList<>();
@@ -68,9 +73,9 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         nomina3 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        obligatoria = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
-        nomina5 = new javax.swing.JTextField();
+        nomina = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         dia = new javax.swing.JComboBox<>();
         mes = new javax.swing.JComboBox<>();
@@ -83,6 +88,7 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         mes1 = new javax.swing.JComboBox<>();
         anio1 = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,12 +96,12 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         jLabel1.setText("Alta, Consulta y Baja Actividades");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        nomina.addActionListener(new java.awt.event.ActionListener() {
+        descipcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nominaActionPerformed(evt);
+                descipcionActionPerformed(evt);
             }
         });
-        getContentPane().add(nomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 290, 60));
+        getContentPane().add(descipcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 290, 60));
 
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -148,22 +154,22 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         jLabel10.setText("Nomina Prefecto");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
 
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        obligatoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                obligatoriaActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+        getContentPane().add(obligatoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         jLabel11.setText("Descripcion");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        nomina5.addActionListener(new java.awt.event.ActionListener() {
+        nomina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomina5ActionPerformed(evt);
+                nominaActionPerformed(evt);
             }
         });
-        getContentPane().add(nomina5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 189, -1));
+        getContentPane().add(nomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 189, -1));
 
         jLabel4.setText("Fecha");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
@@ -217,12 +223,20 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
 
+        jButton1.setText("Alta");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nominaActionPerformed
+    private void descipcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descipcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nominaActionPerformed
+    }//GEN-LAST:event_descipcionActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -252,13 +266,13 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomina3ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void obligatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obligatoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_obligatoriaActionPerformed
 
-    private void nomina5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomina5ActionPerformed
+    private void nominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nominaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomina5ActionPerformed
+    }//GEN-LAST:event_nominaActionPerformed
 
     private void diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaActionPerformed
         // TODO add your handling code here:
@@ -314,6 +328,58 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:alta
+        Actividades a = new Actividades();
+      
+        a.setDescripcion(descipcion.getText());
+        a.setObligatoria(obligatoria.isSelected());
+       
+        
+        Object d = dia.getSelectedItem();
+        Object m = mes.getSelectedItem();
+        Object ao = anio.getSelectedItem();
+
+        
+        final String OLD_FORMAT = "dd/MM/yyyy";
+        final String NEW_FORMAT = "yyyy/MM/dd";
+
+        String oldDateString = Integer.parseInt(d.toString())+"/"+Integer.parseInt(m.toString()) +"/"+Integer.parseInt(ao.toString());
+        String newDateString;
+
+        SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+        Date fecha=new Date();
+        try {
+            fecha = sdf.parse(oldDateString);
+        } catch (ParseException ex) {
+            Logger.getLogger(ventanaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sdf.applyPattern(NEW_FORMAT);
+        newDateString = sdf.format(fecha);
+
+        a.setFecha(fecha);
+
+        TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina()", Prefecto.class);
+        consultaPrefectos.setParameter("nomina",nomina.getText());
+        Prefecto selectedPrefectoEl;
+        System.out.print(consultaPrefectos.getResultList().get(0));
+        selectedPrefectoEl =consultaPrefectos.getResultList().get(0);
+        a.setPrefectoidPrefecto(selectedPrefectoEl);
+        
+        em.getTransaction().begin();
+        try {
+            em.persist(a);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+            jLabel4.setText("Error al registrar");
+        } finally {
+            em.close();
+            jLabel4.setText("Registrado correctamente");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,15 +418,16 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> anio;
     private javax.swing.JComboBox<String> anio1;
+    private javax.swing.JTextField descipcion;
     private javax.swing.JComboBox<String> dia;
     private javax.swing.JComboBox<String> dia1;
     private javax.swing.JButton idAct;
     private javax.swing.JList<String> idB;
     private javax.swing.JTextField idBuscar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -376,6 +443,6 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> mes1;
     private javax.swing.JTextField nomina;
     private javax.swing.JTextField nomina3;
-    private javax.swing.JTextField nomina5;
+    private javax.swing.JCheckBox obligatoria;
     // End of variables declaration//GEN-END:variables
 }
