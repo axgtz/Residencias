@@ -5,14 +5,17 @@
         <group>
             <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/DetallesAlumno.java</file>
             <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/ventanaReportes.java</file>
-            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/BajaHabitacion.java</file>
-            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/AltaHabitacion.java</file>
+            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/ventanaContacto.java</file>
             <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/Habitaciones.java</file>
-            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/AltaPrefecto.java</file>
+            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/Visitas.java</file>
             <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/VentanaDetalleAlumno.java</file>
             <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/Consultas.java</file>
-            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/Entradas.java</file>
             <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/BajaPrefecto.java</file>
+            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/BajaHabitacion.java</file>
+            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/AltaHabitacion.java</file>
+            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/Residencias.java</file>
+            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/AltaPrefecto.java</file>
+            <file>file:/Users/gutz/Documents/GitHub/Residencias/src/residencias/Entradas.java</file>
         </group>
     </open-files>
 </project-private>
