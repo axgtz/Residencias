@@ -5,16 +5,45 @@
  */
 package residencias;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gutz
  */
 public class ActividadesPrefectos extends javax.swing.JFrame {
-
+    ArrayList<String> actividadesListArray;//prefecListArray 
+    
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("ResidenciasPU");
+    EntityManager em = emf.createEntityManager();
+    
+    List<Actividades> actividadesList;//prefectList
+    String selectedActividad;
+    String[] actividades;//entradas
     /**
      * Creates new form ActividadesPrefectos
      */
     public ActividadesPrefectos() {
+        selectedActividad = null;
+        actividadesListArray = new ArrayList(); 
+        //TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina()", Prefecto.class);
+        
+        TypedQuery<Actividades> consltaActividades = em.createNamedQuery("Actividades.findAll", Actividades.class);
+        actividadesList = consltaActividades.getResultList();
+        actividadesList.forEach((temp) -> {
+            actividadesListArray.add(temp.getDescripcion());
+            System.out.print(temp);
+        });
+        actividades = new String[actividadesListArray.size()];
+        for (int i=0; i<actividades.length; i++){
+            actividades[i] = actividadesListArray.get(i);
+        }
         initComponents();
     }
 
@@ -28,40 +57,45 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         nomina = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
+        idB = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
-        nomina1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        idBuscar = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        nomina3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel11 = new javax.swing.JLabel();
+        nomina5 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        dia = new javax.swing.JComboBox<>();
+        mes = new javax.swing.JComboBox<>();
+        anio = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        idAct = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        dia1 = new javax.swing.JComboBox<>();
+        mes1 = new javax.swing.JComboBox<>();
+        anio1 = new javax.swing.JComboBox<>();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Consulta y Baja Prefectos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 20, -1, -1));
-
-        jButton1.setText("Baja");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, -1, -1));
-
-        jLabel5.setText("Nomina");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
+        jLabel1.setText("Alta, Consulta y Baja Actividades");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         nomina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nominaActionPerformed(evt);
             }
         });
-        getContentPane().add(nomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 189, -1));
+        getContentPane().add(nomina, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 290, 60));
 
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,69 +103,122 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, -1, -1));
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 209, 227, 25));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, -1, -1));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = prefectos;
+        idB.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = actividades;
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(idB);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 371, 165));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 295, 400, 180));
 
-        jButton3.setText("Buscar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jLabel6.setText("id Actividad");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
+
+        jLabel7.setText("Id Actividad");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+
+        idBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                idBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
+        getContentPane().add(idBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 189, -1));
 
-        jLabel6.setText("Nomina");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
-
-        nomina1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Buscar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomina1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(nomina1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 189, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
+
+        nomina3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomina3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nomina3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 189, -1));
+
+        jLabel8.setText("Obligatoria");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
+        jLabel10.setText("Nomina Prefecto");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
+
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+
+        jLabel11.setText("Descripcion");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        nomina5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomina5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nomina5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 189, -1));
+
+        jLabel4.setText("Fecha");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+
+        dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
+        dia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+
+        mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1","2","3","4","5","6","7","8","9","10","11","12" }));
+        getContentPane().add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
+
+        anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2017", "2018", "2019", "2020","2021", "2022", "2023", "2024","2025", "2026", "2027" }));
+        getContentPane().add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 420, 20));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 420, 20));
+
+        idAct.setText("Baja");
+        idAct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idActActionPerformed(evt);
+            }
+        });
+        getContentPane().add(idAct, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, -1, -1));
+
+        jLabel12.setText("Fecha");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+
+        dia1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31" }));
+        dia1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dia1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(dia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+
+        mes1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1","2","3","4","5","6","7","8","9","10","11","12" }));
+        getContentPane().add(mes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, -1, -1));
+
+        anio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2017", "2018", "2019", "2020","2021", "2022", "2023", "2024","2025", "2026", "2027" }));
+        getContentPane().add(anio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
+
+        jButton6.setText("Buscar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:Baja
-        TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina()", Prefecto.class);
-        consultaPrefectos.setParameter("nomina",nomina1.getText());
-        Prefecto selectedPrefectoEl;
-        System.out.print(consultaPrefectos.getResultList().get(0));
-        selectedPrefectoEl =consultaPrefectos.getResultList().get(0);
-
-        int n = JOptionPane.showConfirmDialog(null, "Está seguro de eliminar este Prefecto");
-        System.out.println(n);
-        if(n == 0){
-            em.getTransaction().begin();
-            try {
-                em.detach(selectedPrefectoEl);
-                if (!em.contains(selectedPrefectoEl)) {
-                    selectedPrefectoEl = em.merge(selectedPrefectoEl);
-                }
-                em.remove(selectedPrefectoEl);
-                em.getTransaction().commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-                em.getTransaction().rollback();
-                JOptionPane.showMessageDialog(null, "Error de conexión");
-            } finally {
-                em.close();
-                JOptionPane.showMessageDialog(null, "Prefecto eliminado con éxito");
-                dispose();
-            }
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nominaActionPerformed
         // TODO add your handling code here:
@@ -142,23 +229,90 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here: BUSCAR
-        TypedQuery<Prefecto> consultaPrefectos = em.createNamedQuery("Prefecto.findByNomina()", Prefecto.class);
-        consultaPrefectos.setParameter("nomina",nomina.getText());
-        prefectList.forEach((temp) -> {
-            prefecListArray.add(temp.getNombre());
+    private void idBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idBuscarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:BUSCAR FECHA
+         TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades()", Actividades.class);
+        consultaActividades.setParameter("idActividades",idBuscar.getText());
+        actividadesList.forEach((temp) -> {
+            actividadesListArray.add(temp.getIdActividades().toString());
             System.out.print(temp);
         });
-        prefectos = new String[prefecListArray.size()];
-        for (int i=0; i<prefectos.length; i++){
-            prefectos[i] = prefecListArray.get(i);
+        actividades = new String[actividadesListArray.size()];
+        for (int i=0; i<actividades.length; i++){
+            actividades[i] = actividadesListArray.get(i);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        initComponents();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void nomina1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomina1ActionPerformed
+    private void nomina3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomina3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomina1ActionPerformed
+    }//GEN-LAST:event_nomina3ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void nomina5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomina5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomina5ActionPerformed
+
+    private void diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_diaActionPerformed
+
+    private void idActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActActionPerformed
+        // TODO add your handling code here:del idAct
+        TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades()", Actividades.class);
+        consultaActividades.setParameter("idActividades",nomina3.getText());
+        Actividades selectedActividadesEl;
+        System.out.print(consultaActividades.getResultList().get(0));
+        selectedActividadesEl =consultaActividades.getResultList().get(0);
+        
+        int n = JOptionPane.showConfirmDialog(null, "Está seguro de eliminar esta Actividad");
+        System.out.println(n);
+        if(n == 0){
+            em.getTransaction().begin();
+                try {
+                    em.detach(selectedActividadesEl);
+                    if (!em.contains(selectedActividadesEl)) {
+                        selectedActividadesEl = em.merge(selectedActividadesEl);
+                    }
+                    em.remove(selectedActividadesEl);
+                    em.getTransaction().commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    em.getTransaction().rollback();
+                    JOptionPane.showMessageDialog(null, "Error de conexión");
+                } finally {
+                    em.close();
+                    JOptionPane.showMessageDialog(null, "Actividad eliminado con éxito");
+                    dispose();
+                }
+        }
+    }//GEN-LAST:event_idActActionPerformed
+
+    private void dia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dia1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dia1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+         // TODO add your handling code here: BUSCAR
+        TypedQuery<Actividades> consultaActividades = em.createNamedQuery("Actividades.findByIdActividades()", Actividades.class);
+        consultaActividades.setParameter("idActividades",idBuscar.getText());
+        actividadesList.forEach((temp) -> {
+            actividadesListArray.add(temp.getIdActividades().toString());
+            System.out.print(temp);
+        });
+        actividades = new String[actividadesListArray.size()];
+        for (int i=0; i<actividades.length; i++){
+            actividades[i] = actividadesListArray.get(i);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,16 +350,32 @@ public class ActividadesPrefectos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> anio;
+    private javax.swing.JComboBox<String> anio1;
+    private javax.swing.JComboBox<String> dia;
+    private javax.swing.JComboBox<String> dia1;
+    private javax.swing.JButton idAct;
+    private javax.swing.JList<String> idB;
+    private javax.swing.JTextField idBuscar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JComboBox<String> mes;
+    private javax.swing.JComboBox<String> mes1;
     private javax.swing.JTextField nomina;
-    private javax.swing.JTextField nomina1;
+    private javax.swing.JTextField nomina3;
+    private javax.swing.JTextField nomina5;
     // End of variables declaration//GEN-END:variables
 }
