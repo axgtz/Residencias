@@ -3,6 +3,3 @@ Los archivos del proyecto son:
 	Scrum y costos
 	Manuales
 	Entrega final
-
-Código fuente y diagramas en:
-	https://github.com/ArturoBurela/Residencias
